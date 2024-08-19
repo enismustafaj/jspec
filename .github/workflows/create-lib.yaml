@@ -1,0 +1,33 @@
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    get-changed-files:
+        runs-on: ubuntu-latest
+        outputs:
+            all_changed_files: ${{ steps.changed-files-step.outputs.all_changed_files }}
+            any_file_changed: ${{ steps.changed-files-step.outputs.any_file_changed }}
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                fetch-depth: 2
+            - name: Get changed files
+              id: changed-files-step
+              uses: tj-actions/changed-files@v44
+
+
+    trigger-package-generation:
+        needs: [get-changed-files]
+        runs-on: ubuntu-latest
+        steps:
+            - name: print-files
+              if: needs.get-changed-files.outputs.any_file_changed == 'true'
+              env:
+                ALL_CHANGED_FILES: ${{ needs.get-changed-files.outputs.all_changed_files }}
+              run: |
+                for file in ${ALL_CHANGED_FILES}; do
+                    echo "$file was changed"
+                done
+        
