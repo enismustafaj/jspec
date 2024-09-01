@@ -16,6 +16,8 @@ jobs:
             - name: Get changed files
               id: changed-files-step
               uses: tj-actions/changed-files@v44
+              with:
+                files: '*.tsp'
 
 
     trigger-package-generation:
