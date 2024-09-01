@@ -5,6 +5,7 @@ import "@typespec/openapi3";
 
 using TypeSpec.Http;
 
+@doc("User information")
 model User {
   firstName: string;
   lastName: string;
@@ -12,7 +13,7 @@ model User {
   address: Address;
 }
 
-@doc("some doc")
+@doc("Address of the user")
 model Address {
   street: string;
   city: string;
