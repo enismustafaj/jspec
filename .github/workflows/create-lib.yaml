@@ -17,7 +17,6 @@ jobs:
               with:
                 files: '**/*.tsp'
 
-
     trigger-package-generation:
         needs: [get-changed-files]
         runs-on: ubuntu-latest
@@ -37,8 +36,7 @@ jobs:
                 node-version: 20
                 cache: 'npm'
                 cache-dependency-path: ${{github.workspace}}/package-lock.json
-            - run: npm i
-            - uses: actions/checkout@v4
+            - run: npm ci
             - name: Set up JDK
               uses: actions/setup-java@v4
               with:
