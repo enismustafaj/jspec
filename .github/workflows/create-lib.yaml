@@ -38,5 +38,17 @@ jobs:
                 cache: 'npm'
                 cache-dependency-path: ${{github.workspace}}/package-lock.json
             - run: npm i
-                
-        
+            - run: |
+                for file in ${ALL_CHANGED_FILES}; do
+                  tsp compile $file
+                  content=$(<templates/pom-tmpl.xml)
+
+                  api_domain=$(echo $file | sed -n 's|\([^/]*\)/.*|\1|p')
+                  export api_domain
+
+                  echo $content | envsubst > "pom-tmpl.xml"
+
+                  mvn clean compile -f "pom-tmpl.xml"
+                  
+                  mvn deploy -s settings.xml -f pom-tmpl.xml
+                done
