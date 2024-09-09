@@ -38,6 +38,12 @@ jobs:
                 cache: 'npm'
                 cache-dependency-path: ${{github.workspace}}/package-lock.json
             - run: npm i
+            - uses: actions/checkout@v4
+            - name: Set up JDK
+              uses: actions/setup-java@v4
+              with:
+                java-version: '21'
+                distribution: 'temurin'
             - run: |
                 for file in ${ALL_CHANGED_FILES}; do
                   tsp compile $file
