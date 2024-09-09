@@ -45,6 +45,8 @@ jobs:
                 java-version: '21'
                 distribution: 'temurin'
             - name: Generate code and package
+              env:
+                ALL_CHANGED_FILES: ${{ needs.get-changed-files.outputs.all_changed_files }}
               run: |
                 for file in ${ALL_CHANGED_FILES}; do
                     tsp compile $file
