@@ -4,6 +4,7 @@ import "@typespec/openapi3";
 
 using TypeSpec.Http;
 
+
 @doc("User information")
 model User {
   firstName: string;
