@@ -50,10 +50,10 @@ jobs:
                 
                 for file in ${ALL_CHANGED_FILES}; do
                     tsp compile $file
-                    content=$(<template/pom-tmpl.xml)
+                    content=$(<./template/pom-template.xml)
 
-                    api_domain=$(echo $file | sed -n 's|\([^/]*\)/.*|\1|p')
-                    export api_domain
+                    apiDomain=$(echo $file | sed -n 's|\([^/]*\)/.*|\1|p')
+                    export apiDomain
 
                     echo $content | envsubst > "pom-tmpl.xml"
 
