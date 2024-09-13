@@ -46,6 +46,8 @@ jobs:
               env:
                 ALL_CHANGED_FILES: ${{ needs.get-changed-files.outputs.all_changed_files }}
               run: |
+                npm install -g @typespec/compiler
+                
                 for file in ${ALL_CHANGED_FILES}; do
                     tsp compile $file
                     content=$(<templates/pom-tmpl.xml)
