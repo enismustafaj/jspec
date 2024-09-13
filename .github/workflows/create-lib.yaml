@@ -45,6 +45,7 @@ jobs:
             - name: Generate code and package
               env:
                 ALL_CHANGED_FILES: ${{ needs.get-changed-files.outputs.all_changed_files }}
+                token: ${{secrets.GITLAB_TOKEN}}
               run: |
                 npm install -g @typespec/compiler
                 
