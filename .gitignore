@@ -137,5 +137,4 @@ dist
 effective-pom.xml
 pom-tmpl.xml
 generated-code
-.devcontainer
 script.sh
